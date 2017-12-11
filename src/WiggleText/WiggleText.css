@@ -1,0 +1,9 @@
+.wiggle-text-character {
+	display: inline-block;
+}
+
+.wiggle-text-character:hover {
+	background: black;
+	color: white;
+	border-radius: 6px;
+}

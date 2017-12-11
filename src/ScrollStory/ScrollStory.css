@@ -1,0 +1,14 @@
+.scroll-story {
+	position: fixed;
+}
+
+.scroll-story-block {
+	position: absolute;
+	width: 100vw;
+	height: 100vh;
+	background-color: rgb(74, 255, 128);
+}
+
+.scroll-story-block:nth-child(odd) {
+	background-color: #9c50ff;
+}
