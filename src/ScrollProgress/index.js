@@ -39,15 +39,15 @@ class ScrollProgress extends Component {
 	render() {
 		return (
 			<div
-				className="app"
+				className="scroll-progress"
 				onWheel={(evt) => this.onWheel(evt)}
 				ref={(node) => {
 					this.scrollContainer = node;
 				}}
 			>
-				<div className="app-content">
+				<div className="scroll-progress-content">
 					<ScrollStory
-						progress={this.state.scrollPercentProgress}
+						progress={this.state.scrollPixelProgress}
 						story={[
 							{
 								x: 0,
