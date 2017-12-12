@@ -27,10 +27,6 @@ ScrollStoryBlock.propTypes = {
 	props: PropTypes.shape({}),
 };
 
-const progressToTransform = (progress) => {
-
-};
-
 const ScrollStory = ({ story, progress }) => {
 	const { xMax, xMin, yMax, yMin } = story
 		.reduce(findExtremePositions, minMaxDefaults);
