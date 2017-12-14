@@ -12,13 +12,14 @@ const findExtremePositions = (acc, { x, y }) => ({
 	yMin: y < minMaxDefaults.yMin && y < acc.yMin ? y : acc.yMin,
 });
 
-const ScrollStory = ({ story, progress }) => {
+const ScrollStory = ({ story, xPosition, yPosition }) => {
 	const { xMax, xMin, yMax, yMin } = story
 		.reduce(findExtremePositions, minMaxDefaults);
+
 	const containerStyle = {
-		width: `${((xMax - xMin) + 1) * 100}vw`,
-		height: `${((yMax - yMin) + 1) * 100}vh`,
-		transform: `translateY(-${(progress)}px)`,
+		width: `${((xMax - xMin) + 1)}px`,
+		height: `${((yMax - yMin) + 1)}px`,
+		transform: `translate(${-xPosition}px, ${-yPosition}px)`,
 	};
 	return (
 		<div className="scroll-story" style={containerStyle}>
@@ -33,7 +34,8 @@ const ScrollStory = ({ story, progress }) => {
 };
 
 ScrollStory.propTypes = {
-	progress: PropTypes.number.isRequired,
+	yPosition: PropTypes.number.isRequired,
+	xPosition: PropTypes.number.isRequired,
 	story: PropTypes.arrayOf(PropTypes.shape(ScrollStoryBlock.propTypes)).isRequired,
 };
 
