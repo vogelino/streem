@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './App.css';
-import ScrollProgress from '../ScrollProgress';
+import '../../polyfills/optimizedResize';
+import ScrollTimeline from '../ScrollTimeline';
 
 const story = [
 	{
@@ -41,10 +42,29 @@ const story = [
 	},
 ];
 
-const App = () => (
-	<div className="app">
-		<ScrollProgress story={story} />
-	</div>
-);
+class App extends Component {
+	constructor(props) {
+		super(props);
+
+		this.state = {
+			windowWidth: document.body.clientWidth,
+			windowHeight: document.body.clientHeight,
+		};
+	}
+	componentDidMount() {
+		window.addEventListener('optimizedResize', () => this.setState({
+			windowWidth: document.body.clientWidth,
+			windowHeight: document.body.clientHeight,
+		}));
+	}
+	render() {
+		const { windowHeight, windowWidth } = this.state;
+		return (
+			<div className="app">
+				<ScrollTimeline {...{ story, windowWidth, windowHeight }} />
+			</div>
+		);
+	}
+}
 
 export default App;

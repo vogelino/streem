@@ -1,27 +1,22 @@
 import React, { Component } from 'react';
-import './ScrollProgress.css';
+import PropTypes from 'prop-types';
+import './ScrollTimeline.css';
 import ScrollStory from '../ScrollStory';
 import { assignRef } from '../../utils/componentUtil';
 
-class ScrollProgress extends Component {
+class ScrollTimeline extends Component {
 	constructor(props) {
 		super(props);
 
 		this.state = {
-			windowWidth: document.body.clientWidth,
-			windowHeight: document.body.clientHeight,
-			totalScrollProgress: 0,
+			totalScrollTimeline: 0,
 			xScrollPosition: 0,
 			yScrollPosition: 0,
 		};
 	}
 	onWheel(evt) {
-		const {
-			xScrollPosition,
-			yScrollPosition,
-			windowHeight,
-			windowWidth,
-		} = this.state;
+		const { xScrollPosition, yScrollPosition } = this.state;
+		const { windowHeight, windowWidth } = this.props;
 		const isScrollingDown = evt.deltaY > 0;
 
 		let isInFirstColumn = yScrollPosition >= 0 &&
@@ -116,8 +111,10 @@ class ScrollProgress extends Component {
 	}
 }
 
-ScrollProgress.propTypes = {
+ScrollTimeline.propTypes = {
 	story: ScrollStory.propTypes.story,
+	windowHeight: PropTypes.number.isRequired,
+	windowWidth: PropTypes.number.isRequired,
 };
 
-export default ScrollProgress;
+export default ScrollTimeline;
