@@ -31,15 +31,16 @@ class ScrollTimeline extends Component {
 		this.timeline = this.initTimeline(props.story);
 	}
 	onWheel(evt) {
-		const { pixelProgress: oldPixelProgress } = this.state;
+		const {
+			pixelProgress: oldPixelProgress,
+			percentProgress: oldPercentProgress,
+		} = this.state;
 		const pixelProgress = oldPixelProgress + evt.deltaY;
 
 		let percentProgress = (pixelProgress / SCROLL_MAX_DISTANCE);
 		percentProgress = Math.max(0, Math.min(1, percentProgress));
 
-		if (pixelProgress === oldPixelProgress) {
-			return;
-		}
+		if (percentProgress === oldPercentProgress) return;
 
 		this.setState({ percentProgress, pixelProgress });
 		this.timeline.progress(percentProgress);
@@ -62,14 +63,10 @@ class ScrollTimeline extends Component {
 				const addStep = (axis, operation) => {
 					const op = { add: '+', substract: '-' }[operation];
 					const size = axis === 'x' ? windowWidth : windowHeight;
-					tl.to(
-						this.coordinates,
-						size / speed,
-						{
-							[axis]: `${op}=${size}`,
-							ease: ease || Power0.easeNone,
-						}
-					);
+					tl.to(this.coordinates, size / speed, {
+						[axis]: `${op}=${size}`,
+						ease: ease || Power0.easeNone,
+					});
 				};
 
 				switch (direction) {
