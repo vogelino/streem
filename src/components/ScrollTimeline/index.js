@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { TimelineLite, TweenLite, Power0 } from 'gsap';
 import './ScrollTimeline.css';
-import ScrollStory from '../ScrollStory';
+import ScrollLayout from '../ScrollLayout';
 
 const SCROLL_MAX_DISTANCE = 40000;
 
@@ -28,7 +28,7 @@ class ScrollTimeline extends Component {
 			pixelProgress: 0,
 		};
 		this.coordinates = { x: 0, y: 0 };
-		this.timeline = this.initTimeline(props.story);
+		this.timeline = this.initTimeline(props.layout);
 	}
 	onWheel(evt) {
 		const {
@@ -46,15 +46,15 @@ class ScrollTimeline extends Component {
 		this.timeline.progress(percentProgress);
 	}
 	initTimeline() {
-		const { story } = this.props;
+		const { layout } = this.props;
 		const { windowHeight, windowWidth } = this.props;
 		TweenLite.defaultEase = Power0.easeNone;
 		const tl = new TimelineLite({ paused: true });
 
-		story
+		layout
 			.filter(({ ignore }) => !ignore)
 			.forEach((currentBlock, index) => {
-				const nextBlock = story[index + 1];
+				const nextBlock = layout[index + 1];
 				if (!nextBlock) return;
 
 				const { speed, ease } = currentBlock;
@@ -80,7 +80,7 @@ class ScrollTimeline extends Component {
 		return tl;
 	}
 	render() {
-		const { story } = this.props;
+		const { layout } = this.props;
 		const { x, y } = this.coordinates;
 		return (
 			<div
@@ -88,10 +88,10 @@ class ScrollTimeline extends Component {
 				onWheel={(evt) => this.onWheel(evt)}
 			>
 				<div className="scroll-timeline-content">
-					<ScrollStory
+					<ScrollLayout
 						xPosition={x}
 						yPosition={y}
-						story={story}
+						layout={layout}
 					/>
 				</div>
 			</div>
@@ -100,7 +100,7 @@ class ScrollTimeline extends Component {
 }
 
 ScrollTimeline.propTypes = {
-	story: ScrollStory.propTypes.story,
+	layout: ScrollLayout.propTypes.layout,
 	windowHeight: PropTypes.number.isRequired,
 	windowWidth: PropTypes.number.isRequired,
 };

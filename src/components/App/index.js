@@ -4,7 +4,7 @@ import './App.css';
 import '../../polyfills/optimizedResize';
 import ScrollTimeline from '../ScrollTimeline';
 
-const story = [
+const layout = [
 	{
 		x: 0,
 		y: 0,
@@ -76,7 +76,7 @@ class App extends Component {
 		const { windowHeight, windowWidth } = this.state;
 		return (
 			<div className="app">
-				<ScrollTimeline {...{ story, windowWidth, windowHeight }} />
+				<ScrollTimeline {...{ layout, windowWidth, windowHeight }} />
 			</div>
 		);
 	}

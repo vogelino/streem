@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './ScrollStory.css';
-import ScrollStoryBlock from './ScrollStoryBlock';
+import './ScrollLayout.css';
+import ScrollLayoutBlock from './ScrollLayoutBlock';
 
 const minMaxDefaults = { xMax: 0, xMin: 0, yMax: 0, yMin: 0 };
 
@@ -12,8 +12,8 @@ const findExtremePositions = (acc, { x, y }) => ({
 	yMin: y < minMaxDefaults.yMin && y < acc.yMin ? y : acc.yMin,
 });
 
-const ScrollStory = ({ story, xPosition, yPosition }) => {
-	const { xMax, xMin, yMax, yMin } = story
+const ScrollLayout = ({ layout, xPosition, yPosition }) => {
+	const { xMax, xMin, yMax, yMin } = layout
 		.reduce(findExtremePositions, minMaxDefaults);
 
 	const containerStyle = {
@@ -22,21 +22,21 @@ const ScrollStory = ({ story, xPosition, yPosition }) => {
 		transform: `translate(${-xPosition}px, ${-yPosition}px)`,
 	};
 	return (
-		<div className="scroll-story" style={containerStyle}>
-			{story.map((storyBlock) => (
-				<ScrollStoryBlock
-					key={`scroll-story-block-${storyBlock.x}-${storyBlock.y}`}
-					{...storyBlock}
+		<div className="scroll-layout" style={containerStyle}>
+			{layout.map((layoutBlock) => (
+				<ScrollLayoutBlock
+					key={`scroll-layout-block-${layoutBlock.x}-${layoutBlock.y}`}
+					{...layoutBlock}
 				/>
 			))}
 		</div>
 	);
 };
 
-ScrollStory.propTypes = {
+ScrollLayout.propTypes = {
 	yPosition: PropTypes.number.isRequired,
 	xPosition: PropTypes.number.isRequired,
-	story: PropTypes.arrayOf(PropTypes.shape(ScrollStoryBlock.propTypes)).isRequired,
+	layout: PropTypes.arrayOf(PropTypes.shape(ScrollLayoutBlock.propTypes)).isRequired,
 };
 
-export default ScrollStory;
+export default ScrollLayout;
