@@ -84,10 +84,10 @@ class ScrollTimeline extends Component {
 		const { x, y } = this.coordinates;
 		return (
 			<div
-				className="scroll-progress"
+				className="scroll-timeline"
 				onWheel={(evt) => this.onWheel(evt)}
 			>
-				<div className="scroll-progress-content">
+				<div className="scroll-timeline-content">
 					<ScrollStory
 						xPosition={x}
 						yPosition={y}

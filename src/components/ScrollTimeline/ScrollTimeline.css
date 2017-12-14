@@ -1,11 +1,11 @@
-.scroll-progress {
+.scroll-timeline {
 	position: relative;
 	width: 100vw;
 	height: 100vh;
 	overflow: scroll;
 }
 
-.scroll-progress-content {
+.scroll-timeline-content {
 	width: 100vw;
 	height: 100vh;
 	position: fixed;
