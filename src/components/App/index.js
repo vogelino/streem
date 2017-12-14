@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Power4 } from 'gsap';
 import './App.css';
 import '../../polyfills/optimizedResize';
 import ScrollTimeline from '../ScrollTimeline';
@@ -9,36 +10,50 @@ const story = [
 		y: 0,
 		Component: () => <div />,
 		props: {},
+		speed: 1,
 	},
 	{
 		x: 0,
 		y: 1,
 		Component: () => <div />,
 		props: {},
+		speed: 1,
 	},
 	{
 		x: 1,
 		y: 1,
 		Component: () => <div />,
 		props: {},
+		speed: 3,
+		ease: Power4.easeOut,
 	},
 	{
 		x: 1,
 		y: 2,
 		Component: () => <div />,
 		props: {},
+		speed: 1,
 	},
 	{
 		x: 1,
 		y: 3,
 		Component: () => <div />,
 		props: {},
+		speed: 1,
 	},
 	{
 		x: 0,
 		y: 3,
 		Component: () => <div />,
 		props: {},
+		speed: 1,
+	},
+	{
+		x: 0,
+		y: 2,
+		Component: () => <div />,
+		props: {},
+		ignore: true,
 	},
 ];
 

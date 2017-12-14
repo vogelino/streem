@@ -1,108 +1,99 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { TimelineLite, TweenLite, Power0 } from 'gsap';
 import './ScrollTimeline.css';
 import ScrollStory from '../ScrollStory';
-import { assignRef } from '../../utils/componentUtil';
+
+const SCROLL_MAX_DISTANCE = 40000;
+
+const getDirection = ({ x: x1, y: y1 }, { x: x2, y: y2 }) => {
+	if (x1 > x2) {
+		return 'right';
+	}
+	else if (x1 < x2) {
+		return 'left';
+	}
+	else if (y1 > y2) {
+		return 'down';
+	}
+	return 'up';
+};
 
 class ScrollTimeline extends Component {
 	constructor(props) {
 		super(props);
 
 		this.state = {
-			totalScrollTimeline: 0,
-			xScrollPosition: 0,
-			yScrollPosition: 0,
+			percentProgress: 0,
+			pixelProgress: 0,
 		};
+		this.coordinates = { x: 0, y: 0 };
+		this.timeline = this.initTimeline(props.story);
 	}
 	onWheel(evt) {
-		const { xScrollPosition, yScrollPosition } = this.state;
+		const { pixelProgress: oldPixelProgress } = this.state;
+		const pixelProgress = oldPixelProgress + evt.deltaY;
+
+		let percentProgress = (pixelProgress / SCROLL_MAX_DISTANCE);
+		percentProgress = Math.max(0, Math.min(1, percentProgress));
+
+		if (pixelProgress === oldPixelProgress) {
+			return;
+		}
+
+		this.setState({ percentProgress, pixelProgress });
+		this.timeline.progress(percentProgress);
+	}
+	initTimeline() {
+		const { story } = this.props;
 		const { windowHeight, windowWidth } = this.props;
-		const isScrollingDown = evt.deltaY > 0;
+		TweenLite.defaultEase = Power0.easeNone;
+		const tl = new TimelineLite({ paused: true });
 
-		let isInFirstColumn = yScrollPosition >= 0 &&
-			yScrollPosition <= windowHeight &&
-			xScrollPosition === 0;
-		let isInFirstRow = xScrollPosition >= 0 &&
-			xScrollPosition <= windowWidth &&
-			yScrollPosition === windowHeight;
-		let isInSecondColumn = yScrollPosition >= windowHeight &&
-			yScrollPosition <= (3 * windowHeight) &&
-			xScrollPosition === windowWidth;
-		let isInSecondRow = xScrollPosition <= windowWidth &&
-			xScrollPosition >= 0 &&
-			yScrollPosition === (3 * windowHeight);
+		story
+			.filter(({ ignore }) => !ignore)
+			.forEach((currentBlock, index) => {
+				const nextBlock = story[index + 1];
+				if (!nextBlock) return;
 
-		if (isInFirstColumn && isInFirstRow) {
-			isInFirstColumn = !isScrollingDown;
-			isInFirstRow = isScrollingDown;
-		}
-		else if (isInFirstRow && isInSecondColumn) {
-			isInFirstRow = !isScrollingDown;
-			isInSecondColumn = isScrollingDown;
-		}
-		else if (isInSecondColumn && isInSecondRow) {
-			isInSecondColumn = !isScrollingDown;
-			isInSecondRow = isScrollingDown;
-		}
+				const { speed, ease } = currentBlock;
+				const direction = getDirection(currentBlock, nextBlock);
 
-		if (isInFirstColumn) {
-			let newYScrollPosition = yScrollPosition + evt.deltaY;
-			newYScrollPosition = newYScrollPosition > windowHeight ?
-				windowHeight : newYScrollPosition;
-			newYScrollPosition = newYScrollPosition < 0 ?
-				0 : newYScrollPosition;
-			this.setState({
-				yScrollPosition: newYScrollPosition,
-				xScrollPosition: 0,
+				const addStep = (axis, operation) => {
+					const op = { add: '+', substract: '-' }[operation];
+					const size = axis === 'x' ? windowWidth : windowHeight;
+					tl.to(
+						this.coordinates,
+						size / speed,
+						{
+							[axis]: `${op}=${size}`,
+							ease: ease || Power0.easeNone,
+						}
+					);
+				};
+
+				switch (direction) {
+				case 'down': addStep('y', 'substract'); break;
+				case 'up': addStep('y', 'add'); break;
+				case 'right': addStep('x', 'substract'); break;
+				default: addStep('x', 'add'); break;
+				}
 			});
-		}
-		else if (isInFirstRow) {
-			let newXScrollPosition = xScrollPosition + evt.deltaY;
-			newXScrollPosition = newXScrollPosition > windowWidth ?
-				windowWidth : newXScrollPosition;
-			newXScrollPosition = newXScrollPosition < 0 ?
-				0 : newXScrollPosition;
-			this.setState({
-				xScrollPosition: newXScrollPosition,
-				yScrollPosition: windowHeight,
-			});
-		}
-		else if (isInSecondColumn) {
-			let newYScrollPosition = yScrollPosition + evt.deltaY;
-			newYScrollPosition = newYScrollPosition > (3 * windowHeight) ?
-				(3 * windowHeight) : newYScrollPosition;
-			newYScrollPosition = newYScrollPosition < windowHeight ?
-				windowHeight : newYScrollPosition;
-			this.setState({
-				yScrollPosition: newYScrollPosition,
-				xScrollPosition: windowWidth,
-			});
-		}
-		else if (isInSecondRow) {
-			let newXScrollPosition = xScrollPosition - evt.deltaY;
-			newXScrollPosition = newXScrollPosition > windowWidth ?
-				windowWidth : newXScrollPosition;
-			newXScrollPosition = newXScrollPosition < 0 ?
-				0 : newXScrollPosition;
-			this.setState({
-				xScrollPosition: newXScrollPosition,
-				yScrollPosition: (3 * windowHeight),
-			});
-		}
+
+		return tl;
 	}
 	render() {
 		const { story } = this.props;
-		const { xScrollPosition, yScrollPosition } = this.state;
+		const { x, y } = this.coordinates;
 		return (
 			<div
 				className="scroll-progress"
 				onWheel={(evt) => this.onWheel(evt)}
-				ref={assignRef(this.scrollContainer)}
 			>
 				<div className="scroll-progress-content">
 					<ScrollStory
-						xPosition={xScrollPosition}
-						yPosition={yScrollPosition}
+						xPosition={x}
+						yPosition={y}
 						story={story}
 					/>
 				</div>
