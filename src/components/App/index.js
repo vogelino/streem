@@ -1,61 +1,8 @@
 import React, { Component } from 'react';
-import { Power4 } from 'gsap';
 import './App.css';
 import '../../polyfills/optimizedResize';
-import ScrollTimeline from '../ScrollTimeline';
-
-const layout = [
-	{
-		x: 0,
-		y: 0,
-		Component: () => <div />,
-		props: {},
-		speed: 1,
-	},
-	{
-		x: 0,
-		y: 1,
-		Component: () => <div />,
-		props: {},
-		speed: 1,
-	},
-	{
-		x: 1,
-		y: 1,
-		Component: () => <div />,
-		props: {},
-		speed: 3,
-		ease: Power4.easeOut,
-	},
-	{
-		x: 1,
-		y: 2,
-		Component: () => <div />,
-		props: {},
-		speed: 1,
-	},
-	{
-		x: 1,
-		y: 3,
-		Component: () => <div />,
-		props: {},
-		speed: 1,
-	},
-	{
-		x: 0,
-		y: 3,
-		Component: () => <div />,
-		props: {},
-		speed: 1,
-	},
-	{
-		x: 0,
-		y: 2,
-		Component: () => <div />,
-		props: {},
-		ignore: true,
-	},
-];
+import MagazineContent from '../MagazineContent';
+import TitleScreen from '../TitleScreen/index';
 
 class App extends Component {
 	constructor(props) {
@@ -64,6 +11,7 @@ class App extends Component {
 		this.state = {
 			windowWidth: document.body.clientWidth,
 			windowHeight: document.body.clientHeight,
+			page: 'home',
 		};
 	}
 	componentDidMount() {
@@ -73,10 +21,15 @@ class App extends Component {
 		}));
 	}
 	render() {
-		const { windowHeight, windowWidth } = this.state;
+		const { windowHeight, windowWidth, page } = this.state;
 		return (
 			<div className="app">
-				<ScrollTimeline {...{ layout, windowWidth, windowHeight }} />
+				<div className={`page page-home ${page === 'home' && 'page-active'}`}>
+					<TitleScreen onEnterContent={() => this.setState({ page: 'magazine' })} />
+				</div>
+				<div className={`page page-magazine ${page === 'magazine' && 'page-active'}`}>
+					<MagazineContent {...{ windowWidth, windowHeight }} />
+				</div>
 			</div>
 		);
 	}
