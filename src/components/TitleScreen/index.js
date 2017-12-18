@@ -17,7 +17,7 @@ class TitleScreen extends Component {
 	}
 	render() {
 		const { ready } = this.state;
-		const { onEnterContent } = this.state;
+		const { onEnterContent } = this.props;
 		return (
 			<div className="intro-screen">
 				<div className="buildings">
@@ -82,7 +82,7 @@ class TitleScreen extends Component {
 						leftLetter="m"
 					/>
 				</div>
-				<button onClick={onEnterContent}>Enter content</button>
+				<button className="enter-button" onClick={onEnterContent}>Enter Streem</button>
 			</div>
 		);
 	}

@@ -4,3 +4,27 @@
 	position: relative;
 	margin: calc(50vh - 210px) auto;
 }
+
+.enter-button {
+	position: absolute;
+	bottom: 100px;
+	left: 50%;
+	transform: translateX(-50%);
+	z-index: 10;
+	padding: 10px 20px;
+	font-size: 24px;
+	border: 0;
+	background: green;
+	border-radius: 3px;
+	cursor: pointer;
+	color: aliceblue;
+	outline: none;
+}
+
+.enter-button:hover {
+	background: seagreen;
+}
+
+.enter-button:active {
+	background: darkgreen;
+}
