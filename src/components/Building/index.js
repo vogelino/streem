@@ -33,7 +33,9 @@ const BuildingFace = styled.div`
 	font-family: 'Poppins', sans-serif;
 	text-transform: uppercase;
 	color: white;
-	background: ${v('color')};
+	background: ${v('background')};
+	background-size: cover;
+	background-position: center center;
 	width: ${v('width')}px;
 
 	${({ roof }) => roof && css`
@@ -82,11 +84,15 @@ const BuildingComponent = ({
 	zIndex,
 	delay,
 	height,
+	width,
 	ready,
+	leftBackground,
+	topBackground,
+	rightBackground,
 }) => {
 	const common = {
 		easing: 'cubic-bezier(0,1.91,.56,.99)',
-		width: 100,
+		width,
 		height,
 		delay,
 		ready,
@@ -94,13 +100,13 @@ const BuildingComponent = ({
 	return (
 		<Building {...{ top, left, zIndex }}>
 			<BuildingContainer>
-				<BuildingFace {...common} roof color="blue">
+				<BuildingFace {...common} roof background={topBackground}>
 					{topLetter}
 				</BuildingFace>
-				<BuildingFace {...common} side left color="green">
+				<BuildingFace {...common} side left background={leftBackground}>
 					{leftLetter}
 				</BuildingFace>
-				<BuildingFace {...common} side right color="red">
+				<BuildingFace {...common} side right background={rightBackground}>
 					{rightLetter}
 				</BuildingFace>
 			</BuildingContainer>
@@ -117,6 +123,10 @@ BuildingComponent.defaultProps = {
 	zIndex: 1,
 	delay: 0,
 	height: 100,
+	width: 100,
+	leftBackground: 'green',
+	topBackground: 'blue',
+	rightBackground: 'red',
 };
 
 BuildingComponent.propTypes = {
@@ -128,7 +138,11 @@ BuildingComponent.propTypes = {
 	zIndex: PropTypes.number.isRequired,
 	delay: PropTypes.number.isRequired,
 	height: PropTypes.number.isRequired,
+	width: PropTypes.number.isRequired,
 	ready: PropTypes.bool.isRequired,
+	leftBackground: PropTypes.string.isRequired,
+	topBackground: PropTypes.string.isRequired,
+	rightBackground: PropTypes.string.isRequired,
 };
 
 export default BuildingComponent;
