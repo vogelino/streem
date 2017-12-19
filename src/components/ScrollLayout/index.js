@@ -12,20 +12,22 @@ const findExtremePositions = (acc, { x, y }) => ({
 	yMin: y < minMaxDefaults.yMin && y < acc.yMin ? y : acc.yMin,
 });
 
-const ScrollLayout = ({ layout, xPosition, yPosition }) => {
+const ScrollLayout = ({ layout, xPosition, yPosition, progress }) => {
 	const { xMax, xMin, yMax, yMin } = layout
 		.reduce(findExtremePositions, minMaxDefaults);
 
 	const containerStyle = {
 		width: `${((xMax - xMin) + 1)}px`,
 		height: `${((yMax - yMin) + 1)}px`,
-		transform: `translate(${-xPosition}px, ${-yPosition}px)`,
+		left: `${-xPosition}px`,
+		top: `${-yPosition}px`,
 	};
 	return (
 		<div className="scroll-layout" style={containerStyle}>
 			{layout.map((layoutBlock) => (
 				<ScrollLayoutBlock
 					key={`scroll-layout-block-${layoutBlock.x}-${layoutBlock.y}`}
+					progress={progress}
 					{...layoutBlock}
 				/>
 			))}
@@ -36,6 +38,7 @@ const ScrollLayout = ({ layout, xPosition, yPosition }) => {
 ScrollLayout.propTypes = {
 	yPosition: PropTypes.number.isRequired,
 	xPosition: PropTypes.number.isRequired,
+	progress: PropTypes.number.isRequired,
 	layout: PropTypes.arrayOf(PropTypes.shape(ScrollLayoutBlock.propTypes)).isRequired,
 };
 

@@ -2,19 +2,21 @@ import React from 'react';
 import { Power4 } from 'gsap';
 import './MagazineContent.css';
 import ScrollTimeline from '../ScrollTimeline';
+import TitlePage from './Pages/Title';
+import IntroductionPage from './Pages/Introduction';
 
 const layout = [
 	{
 		x: 0,
 		y: 0,
-		Component: () => <div />,
+		Component: TitlePage,
 		props: {},
 		speed: 1,
 	},
 	{
 		x: 0,
 		y: 1,
-		Component: () => <div />,
+		Component: IntroductionPage,
 		props: {},
 		speed: 1,
 	},

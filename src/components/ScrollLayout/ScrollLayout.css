@@ -6,9 +6,7 @@
 	position: absolute;
 	width: 100vw;
 	height: 100vh;
-	background-color: rgb(74, 255, 128);
-}
-
-.scroll-layout-block:nth-child(odd) {
-	background-color: #9c50ff;
+	cursor: url(https://deis.com/assets/images/svg/circle.svg) 4 12, auto;
+	user-select: none;
+	mix-blend-mode: difference;
 }

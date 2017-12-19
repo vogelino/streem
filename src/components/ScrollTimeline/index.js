@@ -80,6 +80,7 @@ class ScrollTimeline extends Component {
 		return tl;
 	}
 	render() {
+		const { percentProgress } = this.state;
 		const { layout } = this.props;
 		const { x, y } = this.coordinates;
 		return (
@@ -91,6 +92,7 @@ class ScrollTimeline extends Component {
 					<ScrollLayout
 						xPosition={x}
 						yPosition={y}
+						progress={percentProgress}
 						layout={layout}
 					/>
 				</div>
