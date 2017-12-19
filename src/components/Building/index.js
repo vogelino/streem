@@ -73,7 +73,7 @@ const BuildingFace = styled.div`
 	`}
 `;
 
-const BuildingCompoenent = ({
+const BuildingComponent = ({
 	topLetter,
 	leftLetter,
 	rightLetter,
@@ -108,7 +108,7 @@ const BuildingCompoenent = ({
 	);
 };
 
-BuildingCompoenent.defaultProps = {
+BuildingComponent.defaultProps = {
 	topLetter: '',
 	rightLetter: '',
 	leftLetter: '',
@@ -119,7 +119,7 @@ BuildingCompoenent.defaultProps = {
 	height: 100,
 };
 
-BuildingCompoenent.propTypes = {
+BuildingComponent.propTypes = {
 	topLetter: PropTypes.string,
 	rightLetter: PropTypes.string,
 	leftLetter: PropTypes.string,
@@ -131,4 +131,4 @@ BuildingCompoenent.propTypes = {
 	ready: PropTypes.bool.isRequired,
 };
 
-export default BuildingCompoenent;
+export default BuildingComponent;

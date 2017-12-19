@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import '../../polyfills/optimizedResize';
 import MagazineContent from '../MagazineContent';
-import TitleScreen from '../TitleScreen/index';
+import TitleScreen from '../TitleScreen';
 
 class App extends Component {
 	constructor(props) {
