@@ -10,8 +10,12 @@ const ScrollLayoutBlock = ({ x, y, Component, props, progress }) => (
 	</div>
 );
 
+ScrollLayoutBlock.defaultProps = {
+	progress: 0,
+};
+
 ScrollLayoutBlock.propTypes = {
-	progress: PropTypes.number.isRequired,
+	progress: PropTypes.number,
 	x: PropTypes.number.isRequired,
 	y: PropTypes.number.isRequired,
 	Component: PropTypes.func.isRequired,

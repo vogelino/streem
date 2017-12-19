@@ -2,7 +2,7 @@ import React from 'react';
 import { Power4 } from 'gsap';
 import './MagazineContent.css';
 import ScrollTimeline from '../ScrollTimeline';
-import TitlePage from './Pages/Title';
+import TitlePage from './Pages/TitleScreen';
 import IntroductionPage from './Pages/Introduction';
 
 const layout = [

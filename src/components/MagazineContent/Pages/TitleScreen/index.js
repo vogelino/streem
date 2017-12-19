@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import Building from '../Building';
+// import PropTypes from 'prop-types';
+import Building from '../../../Building';
 import './TitleScreen.css';
 
 class TitleScreen extends Component {
@@ -17,7 +17,6 @@ class TitleScreen extends Component {
 	}
 	render() {
 		const { ready } = this.state;
-		const { onEnterContent } = this.props;
 		return (
 			<div className="intro-screen">
 				<div className="buildings">
@@ -82,18 +81,13 @@ class TitleScreen extends Component {
 						leftLetter="m"
 					/>
 				</div>
-				<button className="enter-button" onClick={onEnterContent}>Enter Streem</button>
 			</div>
 		);
 	}
 }
 
-TitleScreen.defaultProps = {
-	onEnterContent: () => {},
-};
+TitleScreen.defaultProps = {};
 
-TitleScreen.propTypes = {
-	onEnterContent: PropTypes.func,
-};
+TitleScreen.propTypes = {};
 
 export default TitleScreen;
