@@ -38,7 +38,8 @@ class ScrollTimeline extends Component {
 		const pixelProgress = oldPixelProgress + evt.deltaY;
 
 		let percentProgress = (pixelProgress / SCROLL_MAX_DISTANCE);
-		percentProgress = Math.max(0, Math.min(1, percentProgress));
+		percentProgress = percentProgress < 0 ? 1 + percentProgress : percentProgress;
+		percentProgress = percentProgress > 1 ? percentProgress - 1 : percentProgress;
 
 		if (percentProgress === oldPercentProgress) return;
 
@@ -63,6 +64,7 @@ class ScrollTimeline extends Component {
 				const addStep = (axis, operation) => {
 					const op = { add: '+', substract: '-' }[operation];
 					const size = axis === 'x' ? windowWidth : windowHeight;
+
 					tl.to(this.coordinates, size / speed, {
 						[axis]: `${op}=${size}`,
 						ease: ease || Power0.easeNone,
@@ -83,6 +85,7 @@ class ScrollTimeline extends Component {
 		const { percentProgress } = this.state;
 		const { layout } = this.props;
 		const { x, y } = this.coordinates;
+
 		return (
 			<div
 				className="scroll-timeline"
