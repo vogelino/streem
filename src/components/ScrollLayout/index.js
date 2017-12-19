@@ -26,7 +26,7 @@ const ScrollLayout = ({ layout, xPosition, yPosition, progress }) => {
 		<div className="scroll-layout" style={containerStyle}>
 			{layout.map((layoutBlock) => (
 				<ScrollLayoutBlock
-					key={`scroll-layout-block-${layoutBlock.x}-${layoutBlock.y}`}
+					key={layoutBlock.id}
 					progress={progress}
 					{...layoutBlock}
 				/>
