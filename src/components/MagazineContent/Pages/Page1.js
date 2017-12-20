@@ -86,6 +86,48 @@ class TitleScreen extends Component {
 					ready={ready}
 					leftLetter="m"
 				/>
+				{/* END OF MAIN BUILDINGS */}
+				<Building
+					height={200}
+					top={400}
+					left={-150}
+					zIndex={1}
+					delay={600}
+					ready={ready}
+				/>
+				<Building
+					height={150}
+					top={501}
+					left={-80}
+					zIndex={1}
+					delay={650}
+					ready={ready}
+				/>
+				<Building
+					height={50}
+					width={200}
+					top={672}
+					left={-280}
+					zIndex={1}
+					delay={800}
+					ready={ready}
+				/>
+				<Building
+					height={160}
+					top={541}
+					left={-10}
+					zIndex={1}
+					delay={700}
+					ready={ready}
+				/>
+				<Building
+					height={135}
+					top={617}
+					left={-80}
+					zIndex={1}
+					delay={750}
+					ready={ready}
+				/>
 			</Buildings>
 		);
 	}

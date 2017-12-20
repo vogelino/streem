@@ -6,15 +6,5 @@ import Building from '../../Building';
 
 export default () => (
 	<div>
-		<Building
-			height={250}
-			top={100}
-			left={0}
-			zIndex={2}
-			delay={0}
-			ready
-			rightLetter="S"
-			leftBackground="url('http://z-e-b-u.com/Images/ubahn/ubahn3.jpg')"
-		/>
 	</div>
 );
