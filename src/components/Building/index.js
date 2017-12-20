@@ -2,13 +2,22 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 
-const v = (varName) => (props) => props[varName];
-
-const Building = styled.div`
+const Building = styled.div.attrs({
+	style: ({ height, width, background, easing, delay, zIndex, top, left }) => ({
+		'--height': `${height}px`,
+		'--width': `${width}px`,
+		'--background': `${background}`,
+		'--easing': `${easing}`,
+		'--delay': `${delay}ms`,
+		'--zIndex': zIndex,
+		'--top': `${top}px`,
+		'--left': `${left}px`,
+	}),
+})`
 	position: absolute;
-	z-index: ${v('zIndex')};
-	top: ${v('top')}px;
-	left: ${v('left')}px;
+	z-index: var(--zIndex);
+	top: var(--top);
+	left: var(--left);
 	width: 400px;
 	height: 400px;
 `;
@@ -19,54 +28,32 @@ const BuildingContainer = styled.div`
     position: relative;
 `;
 
-const BuildingFace = styled.div`
+const BuildingFace = styled.div.attrs({
+	style: ({ background }) => ({
+		'--background': background,
+	}),
+})`
 	top: 0;
 	left: 0;
 	position: absolute;
 	overflow: hidden;
 	text-align: center;
-	line-height: ${v('width')}px;
-	font-size: ${v('width')}px;
+	line-height: var(--width);
+	font-size: var(--width);
 	font-weight: 700;
 	transform-style: preserve-3d;
-	font-size: 70px;
 	font-family: 'Poppins', sans-serif;
 	text-transform: uppercase;
 	color: white;
-	background: ${v('background')};
+	background: var(--background);
 	background-size: 300px auto;
 	background-position: center center;
-	width: ${v('width')}px;
-
-	${({ roof }) => roof && css`
-		height: ${v('width')}px;
-		transform-origin: 50% 50%;
-		transform: translate(50%, ${({ height, width }) => height - width}px) rotateX(45deg) rotateZ(45deg);
-		opacity: 0;
-		transition: transform 1s ${v('easing')} ${v('delay')}ms, opacity 100ms ease-out;
-	`}
-
-	${({ roof, ready }) => roof && ready && css`
-		transform: translate(50%, -${v('width')}px) rotateX(45deg) rotateZ(45deg);
-		opacity: 1;
-	`}
-
-	${({ side }) => side && css`
-		max-height: 0;
-		height: 2000px;
-		margin-top: ${v('height')}px;
-		transition: margin-top 1s ${v('easing')} ${v('delay')}ms, max-height 1s ${v('easing')} ${v('delay')}ms;
-	`}
-
-	${({ side, ready }) => side && ready && css`
-		max-height: ${v('height')}px;
-		margin-top: 0;
-	`}
+	width: var(--width);
 
 	${({ right }) => right && css`
 		transform-origin: 0 0;
 		transform: skewY(-36deg) scaleX(.7);
-		left: ${v('width')}px;
+		left: var(--width);
 	`}
 
 	${({ left }) => left && css`
@@ -75,40 +62,59 @@ const BuildingFace = styled.div`
 	`}
 `;
 
-const BuildingComponent = ({
-	topLetter,
-	leftLetter,
-	rightLetter,
-	top,
-	left,
-	zIndex,
-	delay,
-	height,
-	width,
-	ready,
-	leftBackground,
-	topBackground,
-	rightBackground,
-}) => {
-	const common = {
+const RoofFace = styled(BuildingFace)`
+	height: var(--width);
+	transform-origin: 50% 50%;
+	transform: translate(50%, calc(var(--height) - var(--width))) rotateX(45deg) rotateZ(45deg);
+	opacity: 0;
+	transition: transform 1s var(--easing) var(--delay), opacity 100ms ease-out;
+	
+	${({ ready }) => ready && css`
+		transform: translate(50%, calc(var(--width) * -1)) rotateX(45deg) rotateZ(45deg);
+		opacity: 1;
+	`}
+`;
+
+const SideFace = styled(BuildingFace)`
+	max-height: 0;
+	height: 2000px;
+	margin-top: var(--height);
+	transition: margin-top 1s var(--easing) var(--delay), max-height 1s var(--easing) var(--delay);
+
+	${({ ready }) => ready && css`
+		max-height: var(--height);
+		margin-top: 0;
+	`}
+`;
+
+const RightFace = styled(SideFace)`
+	transform-origin: 0 0;
+	transform: skewY(-36deg) scaleX(.7);
+	left: var(--width);
+`;
+
+const LeftFace = styled(SideFace)`
+	transform-origin: 100% 0;
+	transform: skewY(36deg) scaleX(.7);
+`;
+
+const BuildingComponent = (props) => {
+	const allProps = {
 		easing: 'cubic-bezier(0,1.91,.56,.99)',
-		width,
-		height,
-		delay,
-		ready,
+		...props,
 	};
 	return (
-		<Building {...{ top, left, zIndex }}>
+		<Building {...allProps}>
 			<BuildingContainer>
-				<BuildingFace {...common} roof background={topBackground}>
-					{topLetter}
-				</BuildingFace>
-				<BuildingFace {...common} side left background={leftBackground}>
-					{leftLetter}
-				</BuildingFace>
-				<BuildingFace {...common} side right background={rightBackground}>
-					{rightLetter}
-				</BuildingFace>
+				<RoofFace {...allProps} background={props.topBackground}>
+					{props.topLetter}
+				</RoofFace>
+				<LeftFace {...allProps} background={props.leftBackground}>
+					{props.leftLetter}
+				</LeftFace>
+				<RightFace {...allProps} background={props.rightBackground}>
+					{props.rightLetter}
+				</RightFace>
 			</BuildingContainer>
 		</Building>
 	);
