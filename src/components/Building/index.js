@@ -34,7 +34,7 @@ const BuildingFace = styled.div`
 	text-transform: uppercase;
 	color: white;
 	background: ${v('background')};
-	background-size: cover;
+	background-size: 300px auto;
 	background-position: center center;
 	width: ${v('width')}px;
 
@@ -124,8 +124,8 @@ BuildingComponent.defaultProps = {
 	delay: 0,
 	height: 100,
 	width: 100,
-	leftBackground: 'green',
-	topBackground: 'blue',
+	leftBackground: 'blue',
+	topBackground: 'green',
 	rightBackground: 'red',
 };
 
@@ -133,16 +133,16 @@ BuildingComponent.propTypes = {
 	topLetter: PropTypes.string,
 	rightLetter: PropTypes.string,
 	leftLetter: PropTypes.string,
-	top: PropTypes.number.isRequired,
-	left: PropTypes.number.isRequired,
-	zIndex: PropTypes.number.isRequired,
-	delay: PropTypes.number.isRequired,
-	height: PropTypes.number.isRequired,
-	width: PropTypes.number.isRequired,
-	ready: PropTypes.bool.isRequired,
-	leftBackground: PropTypes.string.isRequired,
-	topBackground: PropTypes.string.isRequired,
-	rightBackground: PropTypes.string.isRequired,
+	top: PropTypes.number,
+	left: PropTypes.number,
+	zIndex: PropTypes.number,
+	delay: PropTypes.number,
+	height: PropTypes.number,
+	width: PropTypes.number,
+	ready: PropTypes.bool,
+	leftBackground: PropTypes.string,
+	topBackground: PropTypes.string,
+	rightBackground: PropTypes.string,
 };
 
 export default BuildingComponent;
