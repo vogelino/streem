@@ -1,5 +1,7 @@
 .scroll-layout {
 	position: fixed;
+	/* background: url('/images/floor-pattern.gif'); */
+	background-size: 142px 102px;
 }
 
 .scroll-layout-block {
@@ -8,5 +10,4 @@
 	height: 100vh;
 	cursor: url(https://deis.com/assets/images/svg/circle.svg) 4 12, auto;
 	user-select: none;
-	mix-blend-mode: difference;
 }

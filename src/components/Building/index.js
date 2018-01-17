@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 
 const Building = styled.div.attrs({
-	style: ({ height, width, background, easing, delay, zIndex, top, left }) => ({
+	style: ({ height, width, background, easing, delay, zIndex, top, left, color }) => ({
 		'--height': `${height}px`,
 		'--width': `${width}px`,
 		'--background': `${background}`,
@@ -12,6 +12,7 @@ const Building = styled.div.attrs({
 		'--zIndex': zIndex,
 		'--top': `${top}px`,
 		'--left': `${left}px`,
+		'--color': `${color}`,
 	}),
 })`
 	position: absolute;
@@ -44,11 +45,18 @@ const BuildingFace = styled.div.attrs({
 	transform-style: preserve-3d;
 	font-family: 'Poppins', sans-serif;
 	text-transform: uppercase;
-	color: white;
+	color: var(--color);
 	background: var(--background);
 	background-size: 300px auto;
 	background-position: center center;
 	width: var(--width);
+
+	text-shadow:
+		1px 1px 0 rgba(0,0,0,.1),
+		-1px -1px 0 rgba(0,0,0,.1),  
+		1px -1px 0 rgba(0,0,0,.1),
+		-1px 1px 0 rgba(0,0,0,.1),
+		1px 1px 0 rgba(0,0,0,.1);
 
 	${({ right }) => right && css`
 		transform-origin: 0 0;

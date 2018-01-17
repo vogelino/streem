@@ -17,10 +17,9 @@ const ScrollLayout = ({ layout, xPosition, yPosition, progress }) => {
 		.reduce(findExtremePositions, minMaxDefaults);
 
 	const containerStyle = {
-		width: `${((xMax - xMin) + 1)}px`,
-		height: `${((yMax - yMin) + 1)}px`,
-		left: `${-xPosition}px`,
-		top: `${-yPosition}px`,
+		width: `${((xMax - xMin) + 1)}00vw`,
+		height: `${((yMax - yMin) + 1)}00vh`,
+		transform: `translate(${-xPosition}px, ${-yPosition}px)`,
 	};
 	return (
 		<div className="scroll-layout" style={containerStyle}>

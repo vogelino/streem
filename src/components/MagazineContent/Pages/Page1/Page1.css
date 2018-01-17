@@ -1,0 +1,51 @@
+.ubahn-lang {
+	position: absolute;
+	transform: translate(-808px, -390px);
+	transition: transform 4000ms linear;
+	transition-delay: 5000ms;
+	z-index: 100;
+
+}
+
+.ubahn-lang.ready {
+	transform: translate(1452px, 1237px);
+}
+
+.typo-haeuser {
+	position: absolute;
+	top: 252px;
+	left: 1050px;
+	transform: scale(1.7);
+	opacity: 0;
+	transition: opacity 300ms ease-out 1000ms;
+}
+
+.cinema,
+.streetart,
+.wurstbande {
+	position: absolute;
+	transform: scale(.5);
+	z-index: 100;
+	top: 435px;
+	left: 41px;
+	opacity: 0;
+	transition: opacity 300ms ease-out 1500ms;
+}
+
+.streetart {
+	top: 427px;
+	left: 675px;
+}
+
+.wurstbande {
+	top: 1137px;
+	left: 265px;
+	transform: scale(1);
+}
+
+.cinema.ready,
+.streetart.ready,
+.wurstbande.ready,
+.typo-haeuser.ready {
+	opacity: 1;
+}
