@@ -1,7 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import './ScrollLayout.css';
 import ScrollLayoutBlock from './ScrollLayoutBlock';
+
+const ScrollLayoutWrapper = styled('div')`
+	background: url('/images/Floor.jpg');
+	background-size: 100%;
+	background-position: 0 0;
+	background-repeat: no-repeat;
+`;
 
 const minMaxDefaults = { xMax: 0, xMin: 0, yMax: 0, yMin: 0 };
 
@@ -22,7 +30,7 @@ const ScrollLayout = ({ layout, xPosition, yPosition, progress }) => {
 		transform: `translate(${-xPosition}px, ${-yPosition}px)`,
 	};
 	return (
-		<div className="scroll-layout" style={containerStyle}>
+		<ScrollLayoutWrapper className="scroll-layout" style={containerStyle}>
 			{layout.map((layoutBlock) => (
 				<ScrollLayoutBlock
 					key={layoutBlock.id}
@@ -30,7 +38,7 @@ const ScrollLayout = ({ layout, xPosition, yPosition, progress }) => {
 					{...layoutBlock}
 				/>
 			))}
-		</div>
+		</ScrollLayoutWrapper>
 	);
 };
 
