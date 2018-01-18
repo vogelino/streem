@@ -1,10 +1,11 @@
 import styled from 'styled-components';
 
 export default (type) => styled(type).attrs({
-	style: ({ x = 0, y = 0, delay = 0, startAt = 0 }) => ({
+	style: ({ x = 0, y = 0, delay = 0, startAt = 0, isVisible = false }) => ({
 		top: `${y}px`,
 		left: `${x}px`,
 		transitionDelay: `${delay + startAt}ms`,
+		backgroundColor: (isVisible ? 'red' : 'blue'),
 	}),
 })`
 	position: absolute;

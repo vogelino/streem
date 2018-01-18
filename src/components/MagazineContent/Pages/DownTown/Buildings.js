@@ -1,7 +1,8 @@
 import React from 'react';
 import AbsoluteElement from './AbsoluteElement';
+import ObservedComponent from '../../../ObservedComponent';
 
-export const BuildingBlock = AbsoluteElement('img');
+export const BuildingBlock = ObservedComponent(AbsoluteElement('img'));
 
 export default () => [
 	<BuildingBlock
