@@ -102,9 +102,7 @@ class ScrollTimeline extends Component {
 		const { x, y } = this.coordinates;
 
 		return (
-			<ScrollTimelineWrapper
-				onWheel={(evt) => this.onWheel(evt)}
-			>
+			<ScrollTimelineWrapper onWheel={(evt) => this.onWheel(evt)}>
 				<ScrollTimelineContent>
 					<ScrollLayout
 						xPosition={x}
