@@ -8,7 +8,7 @@ export default class Page extends Component {
 		this.state = { ready: false };
 	}
 	componentDidMount() {
-		setTimeout(() => this.setState({ ready: true }), 10);
+		setTimeout(() => this.setState({ ready: true }), 1000);
 	}
 	render() {
 		return this.props.render(this.state);
