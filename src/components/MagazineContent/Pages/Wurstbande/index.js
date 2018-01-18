@@ -1,10 +1,19 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
 // import styled from 'styled-components';
-// import Building from '../../Building';
+// import PropTypes from 'prop-types';
+import Page from '../Page';
 
-
-export default () => (
-	<div>
-	</div>
+const TitleScreen = () => (
+	<Page render={({ ready }) => (
+		<Page.Screen className={ready && 'ready'}>
+		</Page.Screen>
+	)}
+	/>
 );
+
+TitleScreen.defaultProps = {};
+
+TitleScreen.propTypes = {};
+
+export default TitleScreen;
+

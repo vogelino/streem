@@ -1,35 +1,17 @@
 import React from 'react';
-import styled from 'styled-components';
 // import PropTypes from 'prop-types';
 import Page from '../Page';
-import Buildings, { BuildingBlock } from './Buildings';
-import LightTunnels, { LightTunnel } from './LightTunnels';
-import Letters, { Letter } from './Letters';
+import Buildings from './Buildings';
+import LightTunnels from './LightTunnels';
+import Letters from './Letters';
 import AbsoluteElement from './AbsoluteElement';
 import Lights from './Lights';
-import Light from './Light';
 
 const LightsImg = AbsoluteElement('img');
-const ScreenButton = styled('button')`
-	display: block;
-	border: none;
-	position: relative;
-	width: 100vw;
-	height: 100vh;
-	background: none;
-
-	&.ready ${BuildingBlock},
-	&.ready ${LightTunnel},
-	&.ready ${LightsImg},
-	&.ready ${Letter},
-	&.ready ${Light} {
-		opacity: 1;
-	}
-`;
 
 const TitleScreen = () => (
 	<Page render={({ ready }) => (
-		<ScreenButton className={ready && 'ready'}>
+		<Page.Screen className={ready && 'ready'}>
 			<Buildings />
 			<LightTunnels />
 			<Lights />
@@ -40,7 +22,7 @@ const TitleScreen = () => (
 				delay={800}
 			/>
 			<Letters />
-		</ScreenButton>
+		</Page.Screen>
 	)}
 	/>
 );
