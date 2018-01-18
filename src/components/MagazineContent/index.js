@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import ScrollTimeline from '../ScrollTimeline';
-import Page1 from './Pages/Page1';
+import DownTown from './Pages/DownTown';
 import Page2 from './Pages/Page2';
 import Page3 from './Pages/Page3';
 import Page4 from './Pages/Page4';
@@ -17,7 +17,7 @@ const layout = [
 	{
 		x: 0,
 		y: 0,
-		Component: Page1,
+		Component: DownTown,
 		props: {},
 		id: '01',
 		speed: 1,
