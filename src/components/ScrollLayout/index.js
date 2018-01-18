@@ -3,7 +3,13 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import ScrollLayoutBlock from './ScrollLayoutBlock';
 
-const ScrollLayoutWrapper = styled('div')`
+const ScrollLayoutWrapper = styled.div.attrs({
+	style: ({ xMax, xMin, yMax, yMin, xPosition, yPosition }) => ({
+		width: `${((xMax - xMin) + 1)}00vw`,
+		height: `${((yMax - yMin) + 1)}00vh`,
+		transform: `translate(${-xPosition}px, ${-yPosition}px)`,
+	}),
+})`
 	background: url('/images/Floor.jpg');
 	background-size: 2880px;
 	background-position: 0 0;
@@ -21,16 +27,10 @@ const findExtremePositions = (acc, { x, y }) => ({
 });
 
 const ScrollLayout = ({ layout, xPosition, yPosition, progress }) => {
-	const { xMax, xMin, yMax, yMin } = layout
+	const minMaxValues = layout
 		.reduce(findExtremePositions, minMaxDefaults);
-
-	const containerStyle = {
-		width: `${((xMax - xMin) + 1)}00vw`,
-		height: `${((yMax - yMin) + 1)}00vh`,
-		transform: `translate(${-xPosition}px, ${-yPosition}px)`,
-	};
 	return (
-		<ScrollLayoutWrapper className="scroll-layout" style={containerStyle}>
+		<ScrollLayoutWrapper {...{ ...minMaxValues, xPosition, yPosition }}>
 			{layout.map((layoutBlock) => (
 				<ScrollLayoutBlock
 					key={layoutBlock.id}
