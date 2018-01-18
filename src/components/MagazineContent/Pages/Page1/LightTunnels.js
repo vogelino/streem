@@ -24,7 +24,7 @@ const LightTunnelImg = styled.img.attrs({
 export const LightTunnel = AbsoluteElement('span');
 
 const Tunnel = (props) => (
-	<LightTunnel {...props}>
+	<LightTunnel {...props} startAt={800}>
 		<LightTunnelImg src={props.src} />
 	</LightTunnel>
 );

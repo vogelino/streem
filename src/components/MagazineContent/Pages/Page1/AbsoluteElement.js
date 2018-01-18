@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 
 export default (type) => styled(type).attrs({
-	style: ({ x, y, delay }) => ({
-		top: `${y || 0}px`,
-		left: `${x || 0}px`,
-		transitionDelay: `${delay || 0}ms`,
+	style: ({ x = 0, y = 0, delay = 0, startAt = 0 }) => ({
+		top: `${y}px`,
+		left: `${x}px`,
+		transitionDelay: `${delay + startAt}ms`,
 	}),
 })`
 	position: absolute;
