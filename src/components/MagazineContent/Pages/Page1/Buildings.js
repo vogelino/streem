@@ -1,113 +1,71 @@
 import React from 'react';
-import styled from 'styled-components';
+import AbsoluteElement from './AbsoluteElement';
 
-export const BuildingBlock = styled('img')`
-	position: absolute;
-	transition: opacity 600ms cubic-bezier(.35,.71,.28,1.03);
-	opacity: 0;
-	transform-origin: 0 0;
-	transform: scale(.5);
-`;
-
-export const BuildingsBlockBackLeft = styled(BuildingBlock)`
-	left: 0;
-	top: 0;
-`;
-
-export const BuildingsBlockBack = styled(BuildingBlock)`
-	left: 430px;
-	top: 0;
-	transition-delay: 200ms;
-`;
-
-export const BuildingsBlockBackRight = styled(BuildingBlock)`
-	left: 732px;
-	top: 0;
-	transition-delay: 100ms;
-`;
-
-export const BuildingsBlockLeft = styled(BuildingBlock)`
-	left: 0;
-	top: 5px;
-	transition-delay: 300ms;
-`;
-
-export const BuildingsBlockCenterBack = styled(BuildingBlock)`
-	left: 430px;
-	top: 0;
-	transition-delay: 400ms;
-`;
-
-export const BuildingsBlockCenterLeft = styled(BuildingBlock)`
-	left: 172px;
-	top: 32px;
-	transition-delay: 500ms;
-`;
-
-export const DownTownBlockFront = styled(BuildingBlock)`
-	left: 301px;
-	top: 180px;
-	transition-delay: 600ms;
-`;
-
-export const BuildingsBlockCenterRight = styled(BuildingBlock)`
-	transition-delay: 700ms;
-	left: 645px;
-	top: 25px;
-`;
-
-export const DownTownBlockFrontRight = styled(BuildingBlock)`
-	transition-delay: 800ms;
-	left: 903px;
-	top: 284px;
-`;
-
-export const ShopsAndHouses = styled(BuildingBlock)`
-	transition-delay: 900ms;
-	left: 0;
-	top: 585px;
-`;
+export const BuildingBlock = AbsoluteElement('img');
 
 export default () => [
-	<BuildingsBlockBack
+	<BuildingBlock
 		key="BuildingsBlockBack"
 		src="/images/downtown/BuildingsBlockBack.png"
+		x={430}
 	/>,
-	<BuildingsBlockBackLeft
+	<BuildingBlock
 		key="BuildingsBlockBackLeft"
 		src="/images/downtown/BuildingsBlockBackLeft.png"
+		delay={200}
 	/>,
-	<BuildingsBlockBackRight
+	<BuildingBlock
 		key="BuildingsBlockBackRight"
 		src="/images/downtown/BuildingsBlockBackRight.png"
+		x={732}
+		delay={100}
 	/>,
-	<BuildingsBlockLeft
+	<BuildingBlock
 		key="BuildingsBlockLeft"
 		src="/images/downtown/BuildingsBlockLeft.png"
+		y={5}
+		delay={300}
 	/>,
-	<BuildingsBlockCenterBack
+	<BuildingBlock
 		key="BuildingsBlockCenterBack"
 		src="/images/downtown/BuildingsBlockCenterBack.png"
+		x={430}
+		delay={400}
 	/>,
-	<BuildingsBlockCenterLeft
+	<BuildingBlock
 		key="BuildingsBlockCenterLeft"
 		src="/images/downtown/BuildingsBlockCenterLeft.png"
+		x={172}
+		y={32}
+		delay={500}
 	/>,
-	<BuildingsBlockCenterRight
+	<BuildingBlock
 		key="BuildingsBlockCenterRight"
 		src="/images/downtown/BuildingsBlockCenterRight.png"
+		x={645}
+		y={25}
+		delay={700}
 	/>,
-	<DownTownBlockFront
+	<BuildingBlock
 		key="DownTownBlockFront"
 		src="/images/downtown/DownTownBlockFront.png"
+		x={301}
+		y={180}
+		delay={600}
 	/>,
-	<DownTownBlockFrontRight
+	<BuildingBlock
 		key="DownTownBlockFrontRight"
 		src="/images/downtown/DownTownBlockFrontRight.png"
+		x={903}
+		y={284}
+		delay={800}
 	/>,
-	<ShopsAndHouses
+	<BuildingBlock
 		key="ShopsAndHouses"
 		src="/images/downtown/ShopsAndHouses.png"
+		x={0}
+		y={585}
+		delay={900}
 	/>,
 ];
 
