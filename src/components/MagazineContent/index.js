@@ -1,5 +1,4 @@
 import React from 'react';
-import { Power4 } from 'gsap';
 import './MagazineContent.css';
 import ScrollTimeline from '../ScrollTimeline';
 import Page1 from './Pages/Page1';
@@ -31,7 +30,6 @@ const layout = [
 		props: {},
 		id: '03',
 		speed: 3,
-		ease: Power4.easeOut,
 	},
 	{
 		x: 1,
@@ -39,6 +37,14 @@ const layout = [
 		Component: Page4,
 		props: {},
 		id: '04',
+		speed: 1,
+	},
+	{
+		x: 0,
+		y: 0,
+		Component: () => null,
+		props: {},
+		id: '05',
 		speed: 1,
 	},
 ];
