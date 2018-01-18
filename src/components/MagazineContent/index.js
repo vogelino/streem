@@ -3,8 +3,6 @@ import styled from 'styled-components';
 import ScrollTimeline from '../ScrollTimeline';
 import DownTown from './Pages/DownTown';
 import Wurstbande from './Pages/Wurstbande';
-import Page3 from './Pages/Page3';
-import Page4 from './Pages/Page4';
 
 const MagazineContentWrapper = styled.div`
 	overflow: hidden;
@@ -21,11 +19,12 @@ const layout = [
 		props: {},
 		id: '01',
 		speed: 1,
+		zIndex: 2,
 	},
 	{
 		x: 0,
 		y: 1,
-		Component: Wurstbande,
+		Component: () => null,
 		props: {},
 		id: '02',
 		speed: 1,
@@ -33,7 +32,7 @@ const layout = [
 	{
 		x: 1,
 		y: 1,
-		Component: Page3,
+		Component: () => null,
 		props: {},
 		id: '03',
 		speed: 3,
@@ -41,10 +40,11 @@ const layout = [
 	{
 		x: 1,
 		y: 0,
-		Component: Page4,
+		Component: Wurstbande,
 		props: {},
 		id: '04',
 		speed: 1,
+		zIndex: 1,
 	},
 	{
 		x: 0,

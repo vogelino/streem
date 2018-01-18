@@ -13,6 +13,7 @@ const ScrollLayoutBlockWrapper = styled.div.attrs({
 	height: 100vh;
 	cursor: url(https://deis.com/assets/images/svg/circle.svg) 4 12, auto;
 	user-select: none;
+	z-index: ${({ zIndex }) => zIndex};
 `;
 
 const MagazinePage = styled.div`
@@ -21,8 +22,8 @@ const MagazinePage = styled.div`
 	height: 100vh;
 `;
 
-const ScrollLayoutBlock = ({ x, y, Component, props, progress, id }) => (
-	<ScrollLayoutBlockWrapper {...{ x, y }} id={`scroll-layout-block-${id}`}>
+const ScrollLayoutBlock = ({ x, y, Component, props, progress, id, zIndex }) => (
+	<ScrollLayoutBlockWrapper {...{ x, y, zIndex }} id={`scroll-layout-block-${id}`}>
 		<MagazinePage>
 			<Component {...props} progress={progress} />
 		</MagazinePage>
@@ -31,12 +32,14 @@ const ScrollLayoutBlock = ({ x, y, Component, props, progress, id }) => (
 
 ScrollLayoutBlock.defaultProps = {
 	progress: 0,
+	zIndex: 0,
 };
 
 ScrollLayoutBlock.propTypes = {
 	progress: PropTypes.number,
 	x: PropTypes.number.isRequired,
 	y: PropTypes.number.isRequired,
+	zIndex: PropTypes.number,
 	id: PropTypes.string.isRequired,
 	Component: PropTypes.func.isRequired,
 	props: PropTypes.shape({}),
