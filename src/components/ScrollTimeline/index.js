@@ -1,8 +1,23 @@
 import React, { Component } from 'react';
+import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { TimelineLite, TweenLite, Power0 } from 'gsap';
-import './ScrollTimeline.css';
 import ScrollLayout from '../ScrollLayout';
+
+const ScrollTimelineWrapper = styled.div`
+	position: relative;
+	width: 100vw;
+	height: 100vh;
+	overflow: scroll;
+`;
+
+const ScrollTimelineContent = styled.div`
+	width: 100vw;
+	height: 100vh;
+	position: fixed;
+	top: 0;
+	left: 0;
+`;
 
 const SCROLL_MAX_DISTANCE = 40000;
 
@@ -87,19 +102,18 @@ class ScrollTimeline extends Component {
 		const { x, y } = this.coordinates;
 
 		return (
-			<div
-				className="scroll-timeline"
+			<ScrollTimelineWrapper
 				onWheel={(evt) => this.onWheel(evt)}
 			>
-				<div className="scroll-timeline-content">
+				<ScrollTimelineContent>
 					<ScrollLayout
 						xPosition={x}
 						yPosition={y}
 						progress={percentProgress}
 						layout={layout}
 					/>
-				</div>
-			</div>
+				</ScrollTimelineContent>
+			</ScrollTimelineWrapper>
 		);
 	}
 }

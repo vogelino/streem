@@ -1,10 +1,17 @@
 import React from 'react';
-import './MagazineContent.css';
+import styled from 'styled-components';
 import ScrollTimeline from '../ScrollTimeline';
 import Page1 from './Pages/Page1';
 import Page2 from './Pages/Page2';
 import Page3 from './Pages/Page3';
 import Page4 from './Pages/Page4';
+
+const MagazineContentWrapper = styled.div`
+	overflow: hidden;
+	width: 100vw;
+	height: 100vh;
+	position: relative;
+`;
 
 const layout = [
 	{
@@ -50,9 +57,9 @@ const layout = [
 ];
 
 const MagazineContent = ({ windowWidth, windowHeight }) => (
-	<div className="magazine-content">
+	<MagazineContentWrapper>
 		<ScrollTimeline {...{ layout, windowWidth, windowHeight }} />
-	</div>
+	</MagazineContentWrapper>
 );
 
 MagazineContent.propTypes = {

@@ -1,14 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import './ScrollLayout.css';
 import ScrollLayoutBlock from './ScrollLayoutBlock';
 
 const ScrollLayoutWrapper = styled('div')`
 	background: url('/images/Floor.jpg');
-	background-size: 100%;
+	background-size: 2880px;
 	background-position: 0 0;
 	background-repeat: no-repeat;
+	position: fixed;
 `;
 
 const minMaxDefaults = { xMax: 0, xMin: 0, yMax: 0, yMin: 0 };

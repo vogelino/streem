@@ -1,15 +1,32 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
+
+const ScrollLayoutBlockWrapper = styled.div.attrs({
+	style: ({ x, y }) => ({
+		left: `${x * 100}vw`,
+		top: `${y * 100}vh`,
+	}),
+})`
+	position: absolute;
+	width: 100vw;
+	height: 100vh;
+	cursor: url(https://deis.com/assets/images/svg/circle.svg) 4 12, auto;
+	user-select: none;
+`;
+
+const MagazinePage = styled.div`
+	position: relative;
+	width: 100vw;
+	height: 100vh;
+`;
 
 const ScrollLayoutBlock = ({ x, y, Component, props, progress, id }) => (
-	<div
-		className={`scroll-layout-block scroll-layout-block-${id}`}
-		style={{ left: `${x * 100}vw`, top: `${y * 100}vh` }}
-	>
-		<div className="magazine-page">
+	<ScrollLayoutBlockWrapper {...{ x, y }} id={`scroll-layout-block-${id}`}>
+		<MagazinePage>
 			<Component {...props} progress={progress} />
-		</div>
-	</div>
+		</MagazinePage>
+	</ScrollLayoutBlockWrapper>
 );
 
 ScrollLayoutBlock.defaultProps = {
