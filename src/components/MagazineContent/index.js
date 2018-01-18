@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import ScrollTimeline from '../ScrollTimeline';
 import DownTown from './Pages/DownTown';
-import Page2 from './Pages/Page2';
+import Wurstbande from './Pages/Wurstbande';
 import Page3 from './Pages/Page3';
 import Page4 from './Pages/Page4';
 
@@ -25,7 +25,7 @@ const layout = [
 	{
 		x: 0,
 		y: 1,
-		Component: Page2,
+		Component: Wurstbande,
 		props: {},
 		id: '02',
 		speed: 1,
