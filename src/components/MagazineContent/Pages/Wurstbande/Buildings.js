@@ -78,9 +78,8 @@ const buildings = [
 		delay: 2400,
 		src: image('BackRightBlock'),
 	},
-].map((buildingProps) =>
+].map((buildingProps) => (
 	<BuildingBlock {...buildingProps} key={buildingProps.src} startAt={800} />
-);
+));
 
 export default () => buildings;
-

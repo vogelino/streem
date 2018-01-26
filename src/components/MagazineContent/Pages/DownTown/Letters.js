@@ -47,4 +47,3 @@ export default () => [
 		delay={2300}
 	/>,
 ];
-

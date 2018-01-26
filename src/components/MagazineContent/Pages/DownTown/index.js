@@ -9,26 +9,27 @@ import Lights from './Lights';
 
 const LightsImg = AbsoluteElement('img');
 
-const TitleScreen = () => (
-	<Page render={({ ready }) => (
-		<Page.Screen className={ready && 'ready'}>
-			<Buildings />
-			<LightTunnels />
-			<Lights />
-			<LightsImg
-				src="/images/downtown/lights/Lights.png"
-				x={0}
-				y={67}
-				delay={800}
-			/>
-			<Letters />
-		</Page.Screen>
-	)}
+const Downtown = () => (
+	<Page
+		render={({ ready }) => (
+			<Page.Screen className={ready && 'ready'}>
+				<Buildings />
+				<LightTunnels />
+				<Lights />
+				<LightsImg
+					src="/images/downtown/lights/Lights.png"
+					x={0}
+					y={67}
+					delay={800}
+				/>
+				<Letters />
+			</Page.Screen>
+		)}
 	/>
 );
 
-TitleScreen.defaultProps = {};
+Downtown.defaultProps = {};
 
-TitleScreen.propTypes = {};
+Downtown.propTypes = {};
 
-export default TitleScreen;
+export default Downtown;

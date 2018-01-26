@@ -4,18 +4,18 @@ import React from 'react';
 import Page from '../Page';
 import Buildings from './Buildings';
 
-const TitleScreen = () => (
-	<Page render={({ ready }) => (
-		<Page.Screen className={ready && 'ready'}>
-			<Buildings />
-		</Page.Screen>
-	)}
+const Wurstbande = () => (
+	<Page
+		render={({ ready }) => (
+			<Page.Screen className={ready && 'ready'}>
+				<Buildings />
+			</Page.Screen>
+		)}
 	/>
 );
 
-TitleScreen.defaultProps = {};
+Wurstbande.defaultProps = {};
 
-TitleScreen.propTypes = {};
+Wurstbande.propTypes = {};
 
-export default TitleScreen;
-
+export default Wurstbande;

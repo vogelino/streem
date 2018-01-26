@@ -14,16 +14,21 @@ class App extends Component {
 		};
 	}
 	componentDidMount() {
-		window.addEventListener('optimizedResize', () => this.setState({
-			windowWidth: document.body.clientWidth,
-			windowHeight: document.body.clientHeight,
-		}));
+		window.addEventListener('optimizedResize', () =>
+			this.setState({
+				windowWidth: document.body.clientWidth,
+				windowHeight: document.body.clientHeight,
+			}),
+		);
 	}
 	render() {
 		const { windowHeight, windowWidth, page } = this.state;
 		return (
 			<div className="app">
-				<div className={`page page-magazine ${page === 'magazine' && 'page-active'}`}>
+				<div
+					className={`page page-magazine ${page === 'magazine' &&
+						'page-active'}`}
+				>
 					<MagazineContent {...{ windowWidth, windowHeight }} />
 				</div>
 			</div>

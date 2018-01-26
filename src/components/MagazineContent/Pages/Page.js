@@ -15,7 +15,6 @@ const Screen = styled.div`
 	}
 `;
 
-
 export default class Page extends Component {
 	static Screen = Screen;
 
@@ -37,4 +36,3 @@ export default class Page extends Component {
 Page.propTypes = {
 	render: PropTypes.func.isRequired,
 };
-
