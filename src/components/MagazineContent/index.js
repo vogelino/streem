@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import ScrollTimeline from '../ScrollTimeline';
 import DownTown from './Pages/DownTown';
 import Wurstbande from './Pages/Wurstbande';
+import Gettho from './Pages/Gettho';
 
 const MagazineContentWrapper = styled.div`
 	overflow: hidden;
@@ -24,10 +25,11 @@ const layout = [
 	{
 		x: 0,
 		y: 1,
-		Component: () => null,
+		Component: Gettho,
 		props: {},
 		id: '02',
 		speed: 1,
+		zIndex: 2,
 	},
 	{
 		x: 1,
