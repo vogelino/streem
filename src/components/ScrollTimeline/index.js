@@ -52,9 +52,11 @@ class ScrollTimeline extends Component {
 		} = this.state;
 		const pixelProgress = oldPixelProgress + evt.deltaY;
 
-		let percentProgress = (pixelProgress / SCROLL_MAX_DISTANCE);
-		percentProgress = percentProgress < 0 ? 1 + percentProgress : percentProgress;
-		percentProgress = percentProgress > 1 ? percentProgress - 1 : percentProgress;
+		let percentProgress = pixelProgress / SCROLL_MAX_DISTANCE;
+		percentProgress =
+			percentProgress < 0 ? 1 + percentProgress : percentProgress;
+		percentProgress =
+			percentProgress > 1 ? percentProgress - 1 : percentProgress;
 
 		if (percentProgress === oldPercentProgress) return;
 
@@ -67,32 +69,38 @@ class ScrollTimeline extends Component {
 		TweenLite.defaultEase = Power0.easeNone;
 		const tl = new TimelineLite({ paused: true });
 
-		layout
-			.filter(({ ignore }) => !ignore)
-			.forEach((currentBlock, index) => {
-				const nextBlock = layout[index + 1];
-				if (!nextBlock) return;
+		layout.forEach((currentBlock, index) => {
+			const nextBlock = layout[index + 1];
+			if (!nextBlock) return;
 
-				const { speed, ease } = currentBlock;
-				const direction = getDirection(currentBlock, nextBlock);
+			const { speed, ease } = currentBlock;
+			const direction = getDirection(currentBlock, nextBlock);
 
-				const addStep = (axis, operation) => {
-					const op = { add: '+', substract: '-' }[operation];
-					const size = axis === 'x' ? windowWidth : windowHeight;
+			const addStep = (axis, operation) => {
+				const op = { add: '+', substract: '-' }[operation];
+				const size = axis === 'x' ? windowWidth : windowHeight;
 
-					tl.to(this.coordinates, size / speed, {
-						[axis]: `${op}=${size}`,
-						ease: ease || Power0.easeNone,
-					});
-				};
+				tl.to(this.coordinates, size / speed, {
+					[axis]: `${op}=${size}`,
+					ease: ease || Power0.easeNone,
+				});
+			};
 
-				switch (direction) {
-				case 'down': addStep('y', 'substract'); break;
-				case 'up': addStep('y', 'add'); break;
-				case 'right': addStep('x', 'substract'); break;
-				default: addStep('x', 'add'); break;
-				}
-			});
+			switch (direction) {
+			case 'down':
+				addStep('y', 'substract');
+				break;
+			case 'up':
+				addStep('y', 'add');
+				break;
+			case 'right':
+				addStep('x', 'substract');
+				break;
+			default:
+				addStep('x', 'add');
+				break;
+			}
+		});
 
 		return tl;
 	}
