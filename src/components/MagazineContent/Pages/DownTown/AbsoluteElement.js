@@ -12,6 +12,7 @@ export default (type, additionalStyles = '') => styled(type).attrs({
 	opacity: 0;
 	transform-origin: 0 0;
 	transform: scale(.5);
+	pointer-events: none;
 	${additionalStyles}
 `;
 

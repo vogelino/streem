@@ -1,6 +1,6 @@
 import React from 'react';
-import styled from 'styled-components';
 import AbsoluteElement from '../DownTown/AbsoluteElement';
+import ImageSlider from './ImageSlider';
 
 const BuildingBlock = AbsoluteElement('img', `
 transition: opacity 600ms cubic-bezier(.35,.71,.28,1.03),
@@ -9,17 +9,6 @@ transition: opacity 600ms cubic-bezier(.35,.71,.28,1.03),
 `);
 
 const image = (name) => `/images/gettho/${name}.png`;
-
-const Image = styled.div`
-	position: absolute;
-	top: 0;
-	left: 50%;
-	transform: translate(-50%, ${({ clicked }) => (clicked ? 140 : 1000)}px) skewY(-30deg);
-	transition: transform 800ms cubic-bezier(.51,.55,0,1.5);
-	background: blue;
-	width: 400px;
-	height: 300px;
-`;
 
 const operations = {
 	add: (a, b) => a + b,
@@ -60,7 +49,7 @@ const Buildings = (props) => [
 		src={image('LeftGettho')}
 		key="leftGetthoBlock"
 	/>,
-	<Image {...props} key="GetthoImageSlider" />,
+	<ImageSlider {...props} key="GetthoImageSlider" />,
 	<BuildingBlock
 		x={getBlockX({ base: 259, ...props })}
 		y={getBlockY({ base: -183, ...props })}
