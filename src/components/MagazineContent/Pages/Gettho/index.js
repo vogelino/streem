@@ -39,6 +39,7 @@ class Gettho extends Component {
 						<Buildings
 							hovered={this.state.hovered}
 							clicked={this.state.clicked}
+							close={() => this.setState({ clicked: false })}
 						/>
 						<SvgClickTrigger>
 							<SvgClickTriggerPath

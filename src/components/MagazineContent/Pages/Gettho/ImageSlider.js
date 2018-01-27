@@ -6,27 +6,27 @@ const SliderContainer = styled.div`
 	position: absolute;
 	top: 0;
 	left: 40%;
-	transform: translate(-50%, ${({ clicked }) => (clicked ? 200 : 1000)}px)
+	transform: translate(-50%, ${({ clicked }) => (clicked ? 60 : 1000)}px)
 		skewY(-30deg);
 	transition: transform 800ms cubic-bezier(0.51, 0.55, 0, 1.5);
 	width: 500px;
-	height: 400px;
+	height: 600px;
 `;
 
 const SlidesWrapper = styled.div`
 	width: 500px;
-	height: 400px;
-	overflow: hidden;
+	height: 1000px;
+	pointer-events: none;
 `;
 
 const Slides = styled.div.attrs({
-	style: ({ x }) => ({
-		transform: `translateX(-${x}px)`,
+	style: ({ y }) => ({
+		transform: `translateY(-${y}px)`,
 	}),
 })`
-	transition: transform 800ms cubic-bezier(0, 0.97, 0, 1.02);
-	width: ${({ slidesAmount }) => slidesAmount * 500}px;
-	height: 400px;
+	transition: transform 800ms cubic-bezier(0,.5,0,1.02);
+	height: ${({ slidesAmount }) => slidesAmount * 1000}px;
+	width: 500px;
 `;
 
 const Slide = styled.div.attrs({
@@ -37,11 +37,11 @@ const Slide = styled.div.attrs({
 })`
 	background-size: contain;
 	background-repeat: no-repeat;
-	background-position: center;
+	background-position: center top;
 	width: 500px;
-	height: 400px;
+	height: 1000px;
 	float: left;
-	transition: opacity 600ms cubic-bezier(0, 0.97, 0, 1.02);
+	transition: opacity 800ms ease-in-out;
 `;
 
 const Controls = styled.div`
@@ -58,25 +58,31 @@ const Control = styled.div`
 	width: 60px;
 	height: 60px;
 	border-radius: 50%;
-	background: blue;
-	float: left;
 	transition: transform 200ms ease-out;
 	transform: scale(1);
 	cursor: pointer;
+	background-size: 60px 60px;
+	background-repeat: no-repeat;
 
 	&:hover {
 		transform: scale(1.2);
 	}
 `;
 
-const PrevControl = Control.extend`
-	margin-bottom: 20px;
-`;
+const image = (name) => `/images/gettho/slider/${name}.png`;
 
 const NextControl = Control.extend`
+	margin-bottom: 20px;
+	background-image: url(${image('upButton')});
 `;
 
-const image = (name) => `/images/gettho/slider/${name}.png`;
+const PrevControl = NextControl.extend`
+	background-image: url(${image('downButton')});
+`;
+
+const CloseControl = Control.extend`
+	background-image: url(${image('closeButton')});
+`;
 
 class ImageSlider extends Component {
 	constructor(props) {
@@ -119,7 +125,7 @@ class ImageSlider extends Component {
 			<SliderContainer clicked={this.props.clicked}>
 				<SlidesWrapper>
 					<Slides
-						x={500 * this.state.currentSlide}
+						y={1000 * this.state.currentSlide}
 						slidesAmount={this.state.slides.length}
 					>
 						{this.state.slides.map((url, index) => (
@@ -132,8 +138,9 @@ class ImageSlider extends Component {
 					</Slides>
 				</SlidesWrapper>
 				<Controls>
-					<PrevControl onClick={() => this.goPrev()} />
 					<NextControl onClick={() => this.goNext()} />
+					<PrevControl onClick={() => this.goPrev()} />
+					<CloseControl onClick={() => this.props.close()} />
 				</Controls>
 			</SliderContainer>
 		);
@@ -142,6 +149,7 @@ class ImageSlider extends Component {
 
 ImageSlider.propTypes = {
 	clicked: PropTypes.bool.isRequired,
+	close: PropTypes.func.isRequired,
 };
 
 export default ImageSlider;
