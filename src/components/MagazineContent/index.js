@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import ScrollTimeline from '../ScrollTimeline';
 import DownTown from './Pages/DownTown';
 import Wurstbande from './Pages/Wurstbande';
+import Typoworld from './Pages/Typoworld';
 import Gettho from './Pages/Gettho';
 
 const MagazineContentWrapper = styled.div`
@@ -34,10 +35,11 @@ const layout = [
 	{
 		x: 1,
 		y: 1,
-		Component: () => null,
+		Component: Typoworld,
 		props: {},
 		id: '03',
-		speed: 3,
+		speed: 1,
+		zIndex: 3,
 	},
 	{
 		x: 1,
