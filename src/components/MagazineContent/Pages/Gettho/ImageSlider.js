@@ -17,6 +17,7 @@ const SlidesWrapper = styled.div`
 	width: 500px;
 	height: 1000px;
 	pointer-events: none;
+	transform: scaleX(.9);
 `;
 
 const Slides = styled.div.attrs({
@@ -46,7 +47,7 @@ const Slide = styled.div.attrs({
 
 const Controls = styled.div`
 	position: absolute;
-	left: 520px;
+	left: 500px;
 	top: 50%;
 	transform: translateY(-50%);
 	width: 60px;
