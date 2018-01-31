@@ -3,12 +3,14 @@ import React from 'react';
 // import PropTypes from 'prop-types';
 import Page from '../Page';
 import Buildings from './Buildings';
+import Clouds from './Clouds';
 
 const Wurstbande = () => (
 	<Page
 		render={({ ready }) => (
 			<Page.Screen className={ready && 'ready'}>
 				<Buildings />
+				<Clouds />
 			</Page.Screen>
 		)}
 	/>
