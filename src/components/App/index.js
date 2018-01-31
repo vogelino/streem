@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './App.css';
-import '../../polyfills/optimizedResize';
 import MagazineContent from '../MagazineContent';
 
 class App extends Component {
@@ -12,14 +11,6 @@ class App extends Component {
 			windowHeight: document.body.clientHeight,
 			page: 'magazine',
 		};
-	}
-	componentDidMount() {
-		window.addEventListener('optimizedResize', () =>
-			this.setState({
-				windowWidth: document.body.clientWidth,
-				windowHeight: document.body.clientHeight,
-			}),
-		);
 	}
 	render() {
 		const { windowHeight, windowWidth, page } = this.state;
