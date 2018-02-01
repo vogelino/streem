@@ -6,15 +6,15 @@ import ScrollLayout from '../ScrollLayout';
 
 const ScrollTimelineWrapper = styled.div`
 	position: relative;
-	width: 100vw;
-	height: 100vh;
+	width: 1440px;
+	height: 800px;
 	overflow: scroll;
 `;
 
 const ScrollTimelineContent = styled.div`
-	width: 100vw;
-	height: 100vh;
 	position: fixed;
+	width: 2880px;
+	height: 1600px;
 	top: 0;
 	left: 0;
 `;

@@ -9,8 +9,8 @@ const ScrollLayoutBlockWrapper = styled.div.attrs({
 	}),
 })`
 	position: absolute;
-	width: 100vw;
-	height: 100vh;
+	width: 1440px;
+	height: 800px;
 	cursor: url(https://deis.com/assets/images/svg/circle.svg) 4 12, auto;
 	user-select: none;
 	z-index: ${({ zIndex }) => zIndex};
@@ -18,8 +18,8 @@ const ScrollLayoutBlockWrapper = styled.div.attrs({
 
 const MagazinePage = styled.div`
 	position: relative;
-	width: 100vw;
-	height: 100vh;
+	width: 1440px;
+	height: 800px;
 `;
 
 const ScrollLayoutBlock = ({ x, y, Component, props, progress, id, zIndex }) => (

@@ -8,8 +8,8 @@ import Gettho from './Pages/Gettho';
 
 const MagazineContentWrapper = styled.div`
 	overflow: hidden;
-	width: 100vw;
-	height: 100vh;
+	width: 1440px;
+	height: 800px;
 	position: relative;
 `;
 

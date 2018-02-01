@@ -1,30 +1,24 @@
-import React, { Component } from 'react';
+import React from 'react';
+import styled from 'styled-components';
 import './App.css';
 import MagazineContent from '../MagazineContent';
 
-class App extends Component {
-	constructor(props) {
-		super(props);
+const Page = styled.div`
+	width: 1440px;
+	height: 800px;
+	position: absolute;
+	left: 0;
+	top: 0;
+`;
 
-		this.state = {
-			windowWidth: document.body.clientWidth,
-			windowHeight: document.body.clientHeight,
-			page: 'magazine',
-		};
-	}
-	render() {
-		const { windowHeight, windowWidth, page } = this.state;
-		return (
-			<div className="app">
-				<div
-					className={`page page-magazine ${page === 'magazine' &&
-						'page-active'}`}
-				>
-					<MagazineContent {...{ windowWidth, windowHeight }} />
-				</div>
-			</div>
-		);
-	}
-}
+export default () => (
+	<div className="app">
+		<Page>
+			<MagazineContent
+				windowWidth={1440}
+				windowHeight={800}
+			/>
+		</Page>
+	</div>
+);
 
-export default App;
