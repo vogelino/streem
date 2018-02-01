@@ -24,15 +24,6 @@ const layout = [
 		zIndex: 2,
 	},
 	{
-		x: 1,
-		y: 0,
-		Component: Wurstbande,
-		props: {},
-		id: '04',
-		speed: 1,
-		zIndex: 1,
-	},
-	{
 		x: 0,
 		y: 1,
 		Component: Gettho,
@@ -50,17 +41,34 @@ const layout = [
 		speed: 1,
 		zIndex: 3,
 	},
+	{
+		x: 1,
+		y: 0,
+		Component: Wurstbande,
+		props: {},
+		id: '04',
+		speed: 1,
+		zIndex: 1,
+	},
+	{
+		x: 0,
+		y: 0,
+		Component: () => null,
+		props: {},
+		id: '05',
+		speed: 1,
+	},
 ];
 
-const MagazineContent = () => (
+const MagazineContent = ({ windowWidth, windowHeight }) => (
 	<MagazineContentWrapper>
-		<ScrollTimeline {...{ layout }} />
+		<ScrollTimeline {...{ layout, windowWidth, windowHeight }} />
 	</MagazineContentWrapper>
 );
 
 MagazineContent.propTypes = {
-	// windowWidth: ScrollTimeline.propTypes.windowWidth,
-	// windowHeight: ScrollTimeline.propTypes.windowHeight,
+	windowWidth: ScrollTimeline.propTypes.windowWidth,
+	windowHeight: ScrollTimeline.propTypes.windowHeight,
 };
 
 export default MagazineContent;

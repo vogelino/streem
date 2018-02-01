@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
+import { TimelineLite, TweenLite, Power0 } from 'gsap';
 import ScrollLayout from '../ScrollLayout';
 
 const ScrollTimelineWrapper = styled.div`
@@ -10,39 +12,122 @@ const ScrollTimelineWrapper = styled.div`
 `;
 
 const ScrollTimelineContent = styled.div`
+	position: fixed;
 	width: 2880px;
 	height: 1600px;
 	top: 0;
 	left: 0;
-	overflow: hidden;
 `;
 
-const onScroll = ({ target }) => {
-	const { scrollTop, scrollLeft } = target;
-	let newScrollLeft = scrollLeft;
-	let newScrollTop = scrollTop;
+const SCROLL_MAX_DISTANCE = 40000;
 
-	if (newScrollTop !== 0 && newScrollTop !== 800) {
-		newScrollLeft = newScrollLeft < 720 ? 0 : 1440;
+const getDirection = ({ x: x1, y: y1 }, { x: x2, y: y2 }) => {
+	if (x1 > x2) {
+		return 'right';
 	}
-	if (newScrollLeft !== 0 && newScrollLeft !== 1440) {
-		newScrollTop = newScrollTop < 400 ? 0 : 800;
+	else if (x1 < x2) {
+		return 'left';
 	}
-
-	target.scrollLeft = newScrollLeft; // eslint-disable-line no-param-reassign
-	target.scrollTop = newScrollTop; // eslint-disable-line no-param-reassign
+	else if (y1 > y2) {
+		return 'down';
+	}
+	return 'up';
 };
 
-const ScrollTimeline = ({ layout }) => (
-	<ScrollTimelineWrapper onScroll={onScroll}>
-		<ScrollTimelineContent>
-			<ScrollLayout layout={layout} />
-		</ScrollTimelineContent>
-	</ScrollTimelineWrapper>
-);
+class ScrollTimeline extends Component {
+	constructor(props) {
+		super(props);
+
+		this.state = {
+			percentProgress: 0,
+			pixelProgress: 0,
+		};
+		this.coordinates = { x: 0, y: 0 };
+		this.timeline = this.initTimeline(props.layout);
+	}
+	onWheel(evt) {
+		const {
+			pixelProgress: oldPixelProgress,
+			percentProgress: oldPercentProgress,
+		} = this.state;
+		const pixelProgress = oldPixelProgress + evt.deltaY;
+
+		let percentProgress = pixelProgress / SCROLL_MAX_DISTANCE;
+		percentProgress =
+			percentProgress < 0 ? 1 + percentProgress : percentProgress;
+		percentProgress =
+			percentProgress > 1 ? percentProgress - 1 : percentProgress;
+
+		if (percentProgress === oldPercentProgress) return;
+
+		this.setState({ percentProgress, pixelProgress });
+		this.timeline.progress(percentProgress);
+	}
+	initTimeline() {
+		const { layout } = this.props;
+		const { windowHeight, windowWidth } = this.props;
+		TweenLite.defaultEase = Power0.easeNone;
+		const tl = new TimelineLite({ paused: true });
+
+		layout.forEach((currentBlock, index) => {
+			const nextBlock = layout[index + 1];
+			if (!nextBlock) return;
+
+			const { speed, ease } = currentBlock;
+			const direction = getDirection(currentBlock, nextBlock);
+
+			const addStep = (axis, operation) => {
+				const op = { add: '+', substract: '-' }[operation];
+				const size = axis === 'x' ? windowWidth : windowHeight;
+
+				tl.to(this.coordinates, size / speed, {
+					[axis]: `${op}=${size}`,
+					ease: ease || Power0.easeNone,
+				});
+			};
+
+			switch (direction) {
+			case 'down':
+				addStep('y', 'substract');
+				break;
+			case 'up':
+				addStep('y', 'add');
+				break;
+			case 'right':
+				addStep('x', 'substract');
+				break;
+			default:
+				addStep('x', 'add');
+				break;
+			}
+		});
+
+		return tl;
+	}
+	render() {
+		const { percentProgress } = this.state;
+		const { layout } = this.props;
+		const { x, y } = this.coordinates;
+
+		return (
+			<ScrollTimelineWrapper onWheel={(evt) => this.onWheel(evt)}>
+				<ScrollTimelineContent>
+					<ScrollLayout
+						xPosition={x}
+						yPosition={y}
+						progress={percentProgress}
+						layout={layout}
+					/>
+				</ScrollTimelineContent>
+			</ScrollTimelineWrapper>
+		);
+	}
+}
 
 ScrollTimeline.propTypes = {
 	layout: ScrollLayout.propTypes.layout,
+	windowHeight: PropTypes.number.isRequired,
+	windowWidth: PropTypes.number.isRequired,
 };
 
 export default ScrollTimeline;
