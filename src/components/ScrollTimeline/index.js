@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { TimelineLite, TweenLite, Power0 } from 'gsap';
+import TimelineLite from 'gsap/TimelineLite';
+import TweenLite from 'gsap/TweenLite';
+import { Power0 } from 'gsap/EasePack';
 import ScrollLayout from '../ScrollLayout';
 
 const ScrollTimelineWrapper = styled.div`
@@ -24,11 +26,9 @@ const SCROLL_MAX_DISTANCE = 40000;
 const getDirection = ({ x: x1, y: y1 }, { x: x2, y: y2 }) => {
 	if (x1 > x2) {
 		return 'right';
-	}
-	else if (x1 < x2) {
+	} else if (x1 < x2) {
 		return 'left';
-	}
-	else if (y1 > y2) {
+	} else if (y1 > y2) {
 		return 'down';
 	}
 	return 'up';
@@ -87,18 +87,18 @@ class ScrollTimeline extends Component {
 			};
 
 			switch (direction) {
-			case 'down':
-				addStep('y', 'substract');
-				break;
-			case 'up':
-				addStep('y', 'add');
-				break;
-			case 'right':
-				addStep('x', 'substract');
-				break;
-			default:
-				addStep('x', 'add');
-				break;
+				case 'down':
+					addStep('y', 'substract');
+					break;
+				case 'up':
+					addStep('y', 'add');
+					break;
+				case 'right':
+					addStep('x', 'substract');
+					break;
+				default:
+					addStep('x', 'add');
+					break;
 			}
 		});
 
